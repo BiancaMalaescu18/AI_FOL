@@ -1,0 +1,71 @@
+% Saved by Prover9-Mace4 Version 0.5, December 2007.
+
+set(ignore_option_dependencies). % GUI handles dependencies
+
+if(Prover9). % Options for Prover9
+  assign(max_seconds, 60).
+end_if.
+
+if(Mace4).   % Options for Mace4
+  assign(domain_size, 2).
+  assign(end_size, 2).
+  assign(max_models, -1).
+  assign(max_seconds, 60).
+end_if.
+
+formulas(assumptions).
+
+%Sunt trei zeite pe care le vom numerota cu 1, 2, 3
+%T - truth ; W- wisdom ; L- lie
+
+%cel putin o zeita care spune adevarul, una care minte si o "wisdom"
+T1 | T2| T3.
+W1 | W2 | W3.
+L1 | L2 | L3.
+
+%doar o singura true
+T1 -> -T2 & -T3.
+T2 -> -T1 & -T3.
+T3 -> -T1 & -T2.
+
+%doar o singura wisdom
+W1 -> -W2 & -W3.
+W2 -> -W1 & -W3.
+W3 -> -W1 & -W2.
+
+%doar o singura lie
+L1 -> -L2 & -L3.
+L2 -> -L1 & -L3.
+L3 -> -L1 & -L2.
+
+%fiecare are doar o caracteristica
+T1 -> -W1 & -L1.
+T2 -> -W2 & -L2.
+T3 -> -W3 & -L3.
+
+W1 -> -T1 & -L1.
+W2 -> -L2 & -T2.
+W3 -> -T3 & -L3.
+
+L1 -> -T1 & -W1.
+L2 -> -T2 & -W2.
+L3 -> -T3 & -W3.
+
+L1 -> -A1.
+L2 -> -A2.
+L3 -> -A3.
+
+T1 -> A1.
+T2 -> A2.
+T3 -> A3.
+
+A1 <-> T2.
+A2 <-> W2.
+A3 <-> L2.
+
+end_of_list.
+
+formulas(goals).
+
+end_of_list.
+

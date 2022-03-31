@@ -1,0 +1,81 @@
+% Saved by Prover9-Mace4 Version 0.5, December 2007.
+
+set(ignore_option_dependencies). % GUI handles dependencies
+
+if(Prover9). % Options for Prover9
+  assign(max_seconds, 60).
+end_if.
+
+if(Mace4).   % Options for Mace4
+  assign(domain_size, 2).
+  assign(end_size, 2).
+  assign(max_models, -1).
+  assign(max_seconds, 60).
+end_if.
+
+formulas(assumptions).
+
+%Colored Graph
+%6 noduri, 3 culori disponibile: rosu, verde, albastru
+
+%fiecare nod are o culoare
+A_Red | A_Green | A_Blue.
+B_Red | B_Green | B_Blue.
+C_Red | C_Green | C_Blue.
+D_Red | D_Green | D_Blue.
+E_Red | E_Green | E_Blue.
+F_Red | F_Green | F_Blue.
+
+%Fiecare nod are o singura culoare
+A_Red -> -A_Blue.
+A_Red -> -A_Green.
+A_Green -> -A_Blue.
+
+B_Red -> -B_Blue.
+B_Red -> -B_Green.
+B_Green -> -B_Blue.
+
+C_Red -> -C_Blue.
+C_Red -> -C_Green.
+C_Green -> -C_Blue.
+
+D_Red -> -D_Blue.
+D_Red -> -D_Green.
+D_Green -> -D_Blue.
+
+E_Red -> -E_Blue.
+E_Red -> -E_Green.
+E_Green -> -E_Blue.
+
+F_Red -> -F_Blue.
+F_Red -> -F_Green.
+F_Green -> -F_Blue.
+
+%Vecinii nu pot avea aceeasi culoare
+
+A_Red -> -B_Red & -C_Red & -E_Red & -F_Red.
+A_Green -> -B_Green & -C_Green & -E_Green & -F_Green.
+A_Blue -> -B_Blue & -C_Blue & -E_Blue & -F_Blue.
+
+B_Red ->  -C_Red & -D_Red & -F_Red.
+B_Green ->  -C_Green & -D_Green & -F_Green.
+B_Blue ->  -C_Blue & -D_Blue & -F_Blue.
+
+C_Red ->  -D_Red & -E_Red.
+C_Green ->  -D_Green & -E_Green.
+C_Blue -> -D_Blue & -E_Blue.
+
+D_Red -> -E_Red & -F_Red.
+D_Green ->  -E_Green & -F_Green.
+D_Blue ->  -E_Blue & -F_Blue.
+
+E_Red ->  -F_Red.
+E_Green ->  -F_Green.
+E_Blue ->  -F_Blue.
+
+end_of_list.
+
+formulas(goals).
+
+end_of_list.
+

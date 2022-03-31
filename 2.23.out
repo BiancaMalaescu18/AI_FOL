@@ -1,0 +1,34 @@
+============================== prooftrans ============================
+Prover9 (32) version Dec-2007, Dec 2007.
+Process 12816 was started by Bianca on DESKTOP-2ATM775,
+Sun Dec  5 15:04:10 2021
+The command was "/cygdrive/c/Program Files (x86)/Prover9-Mace4/bin-win32/prover9".
+============================== end of head ===========================
+
+============================== end of input ==========================
+
+============================== PROOF =================================
+
+% -------- Comments from original proof --------
+% Proof 1 at 0.00 (+ 0.01) seconds.
+% Length of proof is 14.
+% Level of proof is 5.
+% Maximum clause weight is 2.
+% Given clauses 0.
+
+1 thin(Paolo) -> -blonde(Carlo) | -tall(Roberta) # label(non_clause).  [assumption].
+2 tall(Roberta) -> lovely(Sandra) # label(non_clause).  [assumption].
+3 lovely(Sandra) & blonde(Carlo) -> thin(Paolo) # label(non_clause).  [assumption].
+4 -tall(Roberta) # label(non_clause) # label(goal).  [goal].
+5 -lovely(Sandra) | -blonde(Carlo) | thin(Paolo).  [clausify(3)].
+6 -thin(Paolo) | -blonde(Carlo) | -tall(Roberta).  [clausify(1)].
+7 tall(Roberta).  [deny(4)].
+8 -tall(Roberta) | lovely(Sandra).  [clausify(2)].
+9 -lovely(Sandra) | -blonde(Carlo) | -blonde(Carlo) | -tall(Roberta).  [resolve(5,c,6,a)].
+10 -lovely(Sandra) | -blonde(Carlo) | -blonde(Carlo).  [resolve(9,d,7,a)].
+11 lovely(Sandra).  [resolve(7,a,8,a)].
+12 blonde(Carlo).  [assumption].
+13 -blonde(Carlo) | -blonde(Carlo).  [resolve(10,a,11,a)].
+14 $F.  [copy(13),merge(b),unit_del(a,12)].
+
+============================== end of proof ==========================

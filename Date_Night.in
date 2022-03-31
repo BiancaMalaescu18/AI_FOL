@@ -1,0 +1,194 @@
+% Saved by Prover9-Mace4 Version 0.5, December 2007.
+
+set(ignore_option_dependencies). % GUI handles dependencies
+
+if(Prover9). % Options for Prover9
+  assign(max_seconds, 60).
+end_if.
+
+if(Mace4).   % Options for Mace4
+  assign(domain_size, 5).
+  assign(start_size, 5).
+  assign(end_size, 5).
+  assign(max_models, -1).
+  assign(max_seconds, 60).
+end_if.
+
+formulas(assumptions).
+
+%fiecare masa (a, b, c, d, e) e diferita de cealalta 
+diferit(a, b).
+diferit(a, c).
+diferit(a, d).
+diferit(a, e).
+diferit(b, c).
+diferit(b, d).
+diferit(b, e).
+diferit(c, d).
+diferit(c, e).
+diferit(d, e).
+
+diferit(x, y) -> diferit(y, x).
+
+vecinDreapta(a,b).
+vecinDreapta(b,c).
+vecinDreapta(c,d).
+vecinDreapta(d,e).
+
+-vecinDreapta(a,a).
+-vecinDreapta(a,c).
+-vecinDreapta(a,d).
+-vecinDreapta(a,e).
+
+-vecinDreapta(b,a).
+-vecinDreapta(b,b).
+-vecinDreapta(b,d).
+-vecinDreapta(b,e).
+
+-vecinDreapta(c,b).
+-vecinDreapta(c,a).
+-vecinDreapta(c,c).
+-vecinDreapta(c,e).
+
+-vecinDreapta(d,d).
+-vecinDreapta(d,c).
+-vecinDreapta(d,b).
+-vecinDreapta(d,a).
+
+-vecinDreapta(e,e).
+-vecinDreapta(e,d).
+-vecinDreapta(e,c).
+-vecinDreapta(e,b).
+-vecinDreapta(e,a).
+
+vecin(x,y) <-> vecinDreapta(x,y) | vecinDreapta(y,x).
+
+undevaDreapta(a,b).
+undevaDreapta(a,c).
+undevaDreapta(a,d).
+undevaDreapta(a,e).
+
+undevaDreapta(b,c).
+undevaDreapta(b,d).
+undevaDreapta(b,e).
+
+undevaDreapta(c,d).
+undevaDreapta(c,e).
+
+undevaDreapta(d,e).
+
+-undevaDreapta(a, a).
+
+-undevaDreapta(b,a).
+-undevaDreapta(b,b).
+
+-undevaDreapta(c,a).
+-undevaDreapta(c,b).
+-undevaDreapta(c,c).
+
+-undevaDreapta(d,c).
+-undevaDreapta(d,b).
+-undevaDreapta(d,a).
+-undevaDreapta(d,d).
+
+-undevaDreapta(e,a).
+-undevaDreapta(e,b).
+-undevaDreapta(e,c).
+-undevaDreapta(e,d).
+-undevaDreapta(e,e).
+
+Andrew(x) | Barry(x) | Daniel(x) | Jerry(x) | Scott(x).
+Ann(x) | Donna(x) | Kristen(x) | Rose(x) | Laura(x).
+blue(x) | pink(x) | purple(x) | red(x) | white(x).
+2years(x) | 3years(x) | 4years(x) | 5years(x) | 6years(x).
+Fettuccine(x) | Lasagne(x) | Ravioli(x) | Spaghetti(x) | Rigatoni(x).
+Argentine(x) | Chilean(x) | French(x) | Italian(x) | Spanish(x).
+
+Andrew(x) & Andrew(y) -> -diferit(x,y).
+Barry(x) & Barry(y) -> -diferit(x,y).
+Daniel(x) & Daniel(y) -> -diferit(x,y).
+Jerry(x) & Jerry(y) -> -diferit(x,y).
+Scott(x) & Scott(y) -> -diferit(x,y).
+
+Ann(x) & Ann(y) -> -diferit(x,y).
+Donna(x) & Donna(y) -> -diferit(x,y).
+Kristen(x) & Kristen(y) -> -diferit(x,y).
+Rose(x) & Rose(y) -> -diferit(x,y).
+Laura(x) & Laura(y) -> -diferit(x,y).
+
+blue(x) & blue(y) -> -diferit(x,y).
+pink(x) & pink(y) -> -diferit(x,y).
+purple(x) & purple(y) -> -diferit(x,y).
+red(x) & red(y) -> -diferit(x,y).
+white(x) & white(y) -> -diferit(x,y).
+
+2years(x) & 2years(y) -> -diferit(x,y).
+3years(x) & 3years(y) -> -diferit(x,y).
+4years(x) & 4years(y) -> -diferit(x,y).
+5years(x) & 5years(y) -> -diferit(x,y).
+6years(x) & 6years(y) -> -diferit(x,y).
+
+Fettuccine(x) & Fettuccine(y) -> -diferit(x,y).
+Lasagne(x) & Lasagne(y) -> -diferit(x,y).
+Ravioli(x) & Ravioli(y) -> -diferit(x,y).
+Spaghetti(x) & Spaghetti(y) -> -diferit(x,y).
+Rigatoni(x) & Rigatoni(y) -> -diferit(x,y).
+Argentine(x) & Argentine(y) -> -diferit(x,y).
+Chilean(x) & Chilean(y) -> -diferit(x,y).
+French(x) & French(y) -> -diferit(x,y).
+Italian(x) & Italian(y) -> -diferit(x,y).
+Spanish(x) & Spanish(y) -> -diferit(x,y).
+
+%Indiciile
+
+3years(x) & French(y) -> vecinDreapta(y,x).
+
+red(e) | red(a).
+
+Rigatoni(x) & Laura(y) -> vecinDreapta(y,x).
+
+Daniel(x) & Italian(y) -> vecinDreapta(y,x).
+
+6years(x)&Donna(y) -> undevaDreapta(x,y).
+Ann(x)&Donna(y) -> undevaDreapta(y,x). 
+
+Laura(x)&Spaghetti(y)->vecinDreapta(y,x).
+
+Fettuccine(x) & white(y) -> undevaDreapta(y,x).
+
+pink(x) & Barry(y) -> undevaDreapta(x,y).
+Andrew(x) & Barry(y) -> undevaDreapta(y,x).
+
+2years(a) | 2years(e).
+
+Rose(x) <-> Rigatoni(x).
+
+Andrew(y) & 5years(x) -> vecin(x,y).
+
+Spanish(x) & white(y) -> undevaDreapta(y,x).
+
+Spaghetti(y) & Fettuccine(x) -> vecin(x,y).
+
+Lasagne(b).
+
+6years(x) <->pink(x).
+
+purple(x) & Scott(y) -> undevaDreapta(x,y).
+
+Rigatoni(a) | Rigatoni(e).
+
+4years(y) & pink(x) -> vecin(x,y).
+
+Kristen(x) & Spanish(y) -> undevaDreapta(x,y).
+Chilean(x) & Spanish(y) -> undevaDreapta(y,x).
+
+3years(x) & Italian(y) -> undevaDreapta(y,x).
+
+Argentine(x) & Laura(y) -> vecinDreapta(y,x).
+
+end_of_list.
+
+formulas(goals).
+
+end_of_list.
+

@@ -1,0 +1,73 @@
+% Saved by Prover9-Mace4 Version 0.5, December 2007.
+
+set(ignore_option_dependencies). % GUI handles dependencies
+
+if(Prover9). % Options for Prover9
+  assign(max_seconds, 60).
+end_if.
+
+if(Mace4).   % Options for Mace4
+  assign(domain_size, 2).
+  assign(end_size, 2).
+  assign(max_models, -1).
+  assign(max_seconds, 60).
+end_if.
+
+formulas(assumptions).
+
+%Lucy and Minna
+
+%Lucy e vampir sau om
+Lucy_vampire | Lucy_human.
+
+%Doar vampir sau doar om.
+Lucy_vampire -> -Lucy_human.
+Lucy_human -> -Lucy_vampire.
+
+%Mina e vampir sau om
+Minna_vampire | Minna_human.
+
+%Doar vampir sau doar om
+Minna_vampire -> -Minna_human.
+Minna_human -> -Minna_vampire.
+
+%una e vampire si una om
+Minna_vampire <-> Lucy_human.
+Lucy_vampire <-> Minna_human.
+
+%oamenii sau vampirii pot fi sane sau insane
+Lucy_human <-> Lucy_sane_human | Lucy_insane_human.
+Minna_human <-> Minna_sane_human | Minna_insane_human.
+Lucy_vampire <-> Lucy_sane_vampire | Lucy_insane_vampire.
+Minna_vampire <-> Minna_sane_vampire | Minna_insane_vampire.
+
+%Lucy si Mina pot fi vampire_sane, vampire_insane, human_sane sau human_insane
+Lucy_sane_human | Lucy_insane_human | Lucy_sane_vampire | Lucy_insane_vampire.
+Minna_sane_human | Minna_insane_human | Minna_sane_vampire | Minna_insane_vampire.
+
+%Pot fi doar una din variante
+Lucy_sane_human ->  -Lucy_insane_human & -Lucy_sane_vampire & -Lucy_insane_vampire.
+Lucy_insane_human ->  -Lucy_sane_human & -Lucy_sane_vampire & -Lucy_insane_vampire.
+Lucy_sane_vampire ->  -Lucy_insane_human & -Lucy_sane_human & -Lucy_insane_vampire.
+Lucy_insane_vampire ->  -Lucy_insane_human & -Lucy_sane_vampire & -Lucy_sane_human.
+
+Minna_sane_human ->  -Minna_insane_human & -Minna_sane_vampire & -Minna_insane_vampire.
+Minna_insane_human ->  -Minna_sane_human & -Minna_sane_vampire & -Minna_insane_vampire.
+Minna_sane_vampire ->  -Minna_insane_human & -Minna_sane_human & -Minna_insane_vampire.
+Minna_insane_vampire ->  -Minna_insane_human & -Minna_sane_vampire & -Minna_sane_human.
+
+Lucy_sane_human | Lucy_insane_vampire -> L1.
+Lucy_insane_human  | Lucy_sane_vampire -> -L1.
+
+Minna_sane_human | Minna_insane_vampire -> M1.
+Minna_insane_human  | Minna_sane_vampire -> -M1.
+
+L1 <-> (Lucy_insane_human & Minna_insane_vampire) | (Minna_insane_human & Lucy_insane_vampire).
+M1 <->  -((Lucy_insane_human & Minna_insane_vampire) | (Minna_insane_human & Lucy_insane_vampire)).
+
+end_of_list.
+
+formulas(goals).
+
+end_of_list.
+
